@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name        Fontchanger
 // @icon        https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://fonts.google.com&size=256
-// @description Change fonts for articles
+// @description Change fonts for certain websites
 // @author      stag-enterprises
 //
-// @version     0.3.1
+// @version     0.3.2
 // @downloadURL https://github.com/stag-enterprises/fontchanger/raw/refs/heads/main/script.user.js
 // @homepageURL https://github.com/stag-enterprises/fontchanger
 // @supportURL  https://github.com/stag-enterprises/fontchanger/issues
