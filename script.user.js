@@ -54,5 +54,5 @@ if (fontUrl) {
   await fontFace.load();
   document.fonts.add(fontFace);
 
-  document.querySelectorAll(SELECTORS[window.location.hostname]).forEach(el => el.style.setProperty("font-family", fontName, "important");
+  document.querySelectorAll(SELECTORS[window.location.hostname]).forEach(el => el.style.setProperty("font-family", fontName, "important"));
 }
