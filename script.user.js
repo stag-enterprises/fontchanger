@@ -4,7 +4,7 @@
 // @description Change fonts for certain websites
 // @author      stag-enterprises
 //
-// @version     0.3.2
+// @version     1.0.0
 // @downloadURL https://github.com/stag-enterprises/fontchanger/raw/refs/heads/main/script.user.js
 // @homepageURL https://github.com/stag-enterprises/fontchanger
 // @supportURL  https://github.com/stag-enterprises/fontchanger/issues
@@ -22,9 +22,10 @@
 const SELECTORS = {
   "dev.to": "div.crayons-article__body.text-styles.spec__body > *:not(.highlight.js-code-highlight)",
   "doc.adminforge.de": "div.CodeMirror",
+  "github.com": "div.cm-line, div.cm-gutterElement"
 };
 
-const generateUniqueId = name => `____USERSCRIPT____${name}__${crypto.randomUUID()}`;
+const GM_getId = name => `____USERSCRIPT____${name}__${crypto.randomUUID()}`;
 const GM_fetch = (url, options) => new Promise((resolve, reject) => new GM_xmlhttpRequest({
   url,
   ...options,
@@ -46,8 +47,8 @@ GM_registerMenuCommand("Set font url", () => {
 
 const fontUrl = GM_getValue("fonturl");
 if (fontUrl) {
-  const font = await GM_fetch(fontUrl, { responseType: "arraybuffer" })
-  const fontName = generateUniqueId("stagenterprises-Fontchanger");
+  const font = await GM_getId(fontUrl, { responseType: "arraybuffer" })
+  const fontName = GM_id("stagenterprises-Fontchanger");
   const fontFace = new FontFace(fontName, font.response);
   await fontFace.load();
   document.fonts.add(fontFace);
