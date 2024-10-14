@@ -4,7 +4,7 @@
 // @description Change fonts for certain websites
 // @author      stag-enterprises
 //
-// @version     1.0.0
+// @version     1.0.1
 // @downloadURL https://github.com/stag-enterprises/fontchanger/raw/refs/heads/main/script.user.js
 // @homepageURL https://github.com/stag-enterprises/fontchanger
 // @supportURL  https://github.com/stag-enterprises/fontchanger/issues
@@ -12,6 +12,7 @@
 //
 // @match       *://dev.to/*
 // @match       *://doc.adminforge.de/*
+// @match       *://github.com/*
 // @grant       GM_registerMenuCommand
 // @grant       GM_setValue
 // @grant       GM_getValue
@@ -22,7 +23,7 @@
 const SELECTORS = {
   "dev.to": "div.crayons-article__body.text-styles.spec__body > *:not(.highlight.js-code-highlight)",
   "doc.adminforge.de": "div.CodeMirror",
-  "github.com": "div.cm-line, div.cm-gutterElement"
+  "github.com": "div.cm-line, div.cm-gutterElement, textarea.react-blob-print-hide"
 };
 
 const GM_getId = name => `____USERSCRIPT____${name}__${crypto.randomUUID()}`;
