@@ -5,7 +5,7 @@
 // @author      stag-enterprises
 //
 // @version     0.2
-// @updateURL   https://github.com/stag-enterprises/fontchanger/raw/refs/heads/main/script.user.js
+// @downloadURL https://github.com/stag-enterprises/fontchanger/raw/refs/heads/main/script.user.js
 // @homepageURL https://github.com/stag-enterprises/fontchanger
 // @supportURL  https://github.com/stag-enterprises/fontchanger/issues
 // @namespace   stag.lol
