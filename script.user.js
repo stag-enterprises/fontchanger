@@ -4,7 +4,7 @@
 // @description Change fonts for articles
 // @author      stag-enterprises
 //
-// @version     0.3
+// @version     0.3.1
 // @downloadURL https://github.com/stag-enterprises/fontchanger/raw/refs/heads/main/script.user.js
 // @homepageURL https://github.com/stag-enterprises/fontchanger
 // @supportURL  https://github.com/stag-enterprises/fontchanger/issues
@@ -46,7 +46,7 @@ GM_registerMenuCommand("Set font url", () => {
 
 const fontUrl = GM_getValue("fonturl");
 if (fontUrl) {
-  const font = await GM_fetch(fontUrl, responseType: "arraybuffer" })
+  const font = await GM_fetch(fontUrl, { responseType: "arraybuffer" })
   const fontName = generateUniqueId("stagenterprises-Fontchanger");
   const fontFace = new FontFace(fontName, font.response);
   await fontFace.load();
