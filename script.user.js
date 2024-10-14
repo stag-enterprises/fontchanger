@@ -4,7 +4,7 @@
 // @description Change fonts for certain websites
 // @author      stag-enterprises
 //
-// @version     1.0.2
+// @version     1.1.0
 // @downloadURL https://github.com/stag-enterprises/fontchanger/raw/refs/heads/main/script.user.js
 // @homepageURL https://github.com/stag-enterprises/fontchanger
 // @supportURL  https://github.com/stag-enterprises/fontchanger/issues
