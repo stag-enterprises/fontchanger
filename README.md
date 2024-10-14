@@ -18,6 +18,8 @@
 ## Supported Sites
 - [dev.to]
 - [HedgeDoc] (Default link only applies to doc.adminForge.de, add your own @match. Probably works with HackMD, but untested.)
+- [GitHub]
 
 [dev.to]: https://dev.to
 [HedgeDoc]: https://doc.adminforge.de
+[GitHub]: https://github.com
