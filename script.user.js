@@ -4,7 +4,7 @@
 // @description Change fonts for certain websites
 // @author      stag-enterprises
 //
-// @version     1.1.1
+// @version     2.0.0
 // @downloadURL https://github.com/stag-enterprises/fontchanger/raw/refs/heads/main/script.user.js
 // @homepageURL https://github.com/stag-enterprises/fontchanger
 // @supportURL  https://github.com/stag-enterprises/fontchanger/issues
@@ -13,46 +13,54 @@
 // @match       *://dev.to/*
 // @match       *://doc.adminforge.de/*
 // @match       *://github.com/*
-// @grant       GM_registerMenuCommand
-// @grant       GM_setValue
-// @grant       GM_getValue
-// @grant       GM_xmlhttpRequest
+// @grant       GM.registerMenuCommand
+// @grant       GM.setValue
+// @grant       GM.getValue
+// @grant       GM.xmlhttpRequest
 // @top-level-await
 // ==/UserScript==
+// TODO
+// - per site font url
+//////////////////////////////////////////////////
 
-const SELECTORS = {
-  "dev.to": "div.crayons-article__body.text-styles.spec__body > *:not(.highlight.js-code-highlight)",
-  "doc.adminforge.de": "div.CodeMirror",
-  "github.com": "div.cm-line, div.cm-gutterElement, textarea.react-blob-print-hide"
+const GLOBAL_FONT_URL = "globalfonturl";
+
+const getId = name => `____USERSCRIPT____${name}__${crypto.randomUUID()}`;
+
+const loadFont = async url => {
+  const name = getId("stagenterprises-Fontchanger");
+
+  const font = await GM.xmlhttpRequest({ url, responseType: "arraybuffer" });
+  const fontFace = new FontFace(name, font.response);
+  await fontFace.load();
+  document.fonts.add(fontFace);
+
+  return name;
 };
 
-const GM_getId = name => `____USERSCRIPT____${name}__${crypto.randomUUID()}`;
-const GM_fetch = (url, options) => new Promise((resolve, reject) => new GM_xmlhttpRequest({
-  url,
-  ...options,
-  onabort: reject,
-  onerror: reject,
-  ontimeout: reject,
-  onload: resolve,
-}));
+const setFontFamily = (selector, name) => document.querySelectorAll(selector).forEach(el => el.style.setProperty("font-family", name, "important"));
+const setRootStyle = document.documentElement.style.setProperty.bind(document.documentElement.style);
 
-GM_registerMenuCommand("Set font url", () => {
+GM.registerMenuCommand("Set font url", () => {
   let fontUrl;
   while (!fontUrl) {
     fontUrl = prompt("URL of font?");
   }
 
-  GM_setValue("fonturl", fontUrl);
+  await GM.setValue("fonturl", fontUrl);
   alert("Set font url");
 });
 
-const fontUrl = GM_getValue("fonturl");
-if (fontUrl) {
-  const font = await GM_fetch(fontUrl, { responseType: "arraybuffer" })
-  const fontName = GM_getId("stagenterprises-Fontchanger");
-  const fontFace = new FontFace(fontName, font.response);
-  await fontFace.load();
-  document.fonts.add(fontFace);
-
-  document.querySelectorAll(SELECTORS[window.location.hostname]).forEach(el => el.style.setProperty("font-family", fontName, "important"));
+const globalFont = await loadFont(GM.getValue(GLOBAL_FONT_URL));
+if (globalFont) {
+  if (location.hostname === "dev.to") {
+    // dev.to
+    setFontFamily("div.crayons-article__body.text-styles.spec__body > *:not(.highlight.js-code-highlight", globalFont);
+  } else if (location.hostname === "github.com") {
+    // GitHub
+    setRootStyle("--fontStack-monospace", globalFont)
+  } else if (Array.from(document.querySelectorAll("img")).map(el => el.alt).includes("HedgeDoc")) {
+    // HedgeDoc
+    setFontFamily("div.CodeMirror", globalFont);
+  }
 }
