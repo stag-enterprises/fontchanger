@@ -1,5 +1,5 @@
 # fontchanger
-###### Userscript for changing article fonts
+###### Userscript for changing fonts of certain websites
 
 ## Installation
 1. Install [ViolentMonkey]
