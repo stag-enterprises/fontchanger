@@ -4,7 +4,6 @@
 ## Installation
 1. Install [ViolentMonkey](https://violentmonkey.github.io/)
 2. Install the [UserScript](https://github.com/stag-enterprises/fontchanger/raw/refs/heads/main/script.user.js)
-3. Profit
 
 ## Usage
 1. Open the ViolentMonkey UI, and select "Set font url"
