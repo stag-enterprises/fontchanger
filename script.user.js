@@ -4,7 +4,7 @@
 // @description Change fonts for articles
 // @author      stag-enterprises
 //
-// @version     0.1
+// @version     0.2
 // @updateURL   https://github.com/stag-enterprises/fontchanger/raw/refs/heads/main/script.user.js
 // @homepageURL https://github.com/stag-enterprises/fontchanger
 // @supportURL  https://github.com/stag-enterprises/fontchanger/issues
