@@ -12,5 +12,4 @@
 3. Reload the page
 
 ## Supported Sites
-###### Sites will be added when I feel the need to use them
 - [dev.to](dev.to)
