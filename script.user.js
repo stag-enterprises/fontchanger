@@ -4,7 +4,7 @@
 // @description Change fonts for certain websites
 // @author      stag-enterprises
 //
-// @version     1.1.0
+// @version     1.1.1
 // @downloadURL https://github.com/stag-enterprises/fontchanger/raw/refs/heads/main/script.user.js
 // @homepageURL https://github.com/stag-enterprises/fontchanger
 // @supportURL  https://github.com/stag-enterprises/fontchanger/issues
@@ -54,5 +54,5 @@ if (fontUrl) {
   await fontFace.load();
   document.fonts.add(fontFace);
 
-  document.querySelectorAll(SELECTORS[window.location.hostname]).forEach(el => el.style.fontFamily = `${fontName} !important`);
+  document.querySelectorAll(SELECTORS[window.location.hostname]).forEach(el => el.style.setProperty("font-family", fontName, "important");
 }
