@@ -4,7 +4,7 @@
 // @description Change fonts for certain websites
 // @author      stag-enterprises
 //
-// @version     2.0.1
+// @version     2.0.2
 // @downloadURL https://github.com/stag-enterprises/fontchanger/raw/refs/heads/main/script.user.js
 // @homepageURL https://github.com/stag-enterprises/fontchanger
 // @supportURL  https://github.com/stag-enterprises/fontchanger/issues
@@ -22,6 +22,7 @@
 // ==/UserScript==
 // TODO
 // - per site font url
+// - font size customization
 //////////////////////////////////////////////////
 
 const GLOBAL_FONT_URL = "globalfonturl";
@@ -32,7 +33,6 @@ const loadFont = async url => {
   const name = getId("stagenterprises-Fontchanger");
 
   const font = await GM.xmlHttpRequest({ url, responseType: "arraybuffer" });
-  console.log(font);
   const fontFace = new FontFace(name, font.response);
   await fontFace.load();
   document.fonts.add(fontFace);
