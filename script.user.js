@@ -11,6 +11,7 @@
 // @namespace   stag.lol
 //
 // @match       *://dev.to/*
+// @match       *://doc.adminforge.de/*
 // @grant       GM_registerMenuCommand
 // @grant       GM_setValue
 // @grant       GM_getValue
@@ -31,6 +32,7 @@ GM_registerMenuCommand("Set font url", () => {
 
 const SELECTORS = {
   "dev.to": "div.crayons-article__body.text-styles.spec__body > *:not(.highlight.js-code-highlight)",
+  "doc.adminforge.de": "div.CodeMirror",
 };
 
 const fontUrl = GM_getValue("fonturl");
