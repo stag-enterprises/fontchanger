@@ -4,7 +4,7 @@
 // @description Change fonts for certain websites
 // @author      stag-enterprises
 //
-// @version     1.0.1
+// @version     1.0.2
 // @downloadURL https://github.com/stag-enterprises/fontchanger/raw/refs/heads/main/script.user.js
 // @homepageURL https://github.com/stag-enterprises/fontchanger
 // @supportURL  https://github.com/stag-enterprises/fontchanger/issues
@@ -48,8 +48,8 @@ GM_registerMenuCommand("Set font url", () => {
 
 const fontUrl = GM_getValue("fonturl");
 if (fontUrl) {
-  const font = await GM_getId(fontUrl, { responseType: "arraybuffer" })
-  const fontName = GM_id("stagenterprises-Fontchanger");
+  const font = await GM_fetch(fontUrl, { responseType: "arraybuffer" })
+  const fontName = GM_getId("stagenterprises-Fontchanger");
   const fontFace = new FontFace(fontName, font.response);
   await fontFace.load();
   document.fonts.add(fontFace);
