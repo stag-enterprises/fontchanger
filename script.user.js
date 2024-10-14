@@ -4,7 +4,7 @@
 // @description Change fonts for articles
 // @author      stag-enterprises
 //
-// @version     0.2
+// @version     0.3
 // @downloadURL https://github.com/stag-enterprises/fontchanger/raw/refs/heads/main/script.user.js
 // @homepageURL https://github.com/stag-enterprises/fontchanger
 // @supportURL  https://github.com/stag-enterprises/fontchanger/issues
@@ -15,10 +15,24 @@
 // @grant       GM_registerMenuCommand
 // @grant       GM_setValue
 // @grant       GM_getValue
+// @grant       GM_xmlhttpRequest
 // @top-level-await
 // ==/UserScript==
 
-const generateUniqueId = (name) => `____USERSCRIPT____${name}__${crypto.randomUUID()}`;
+const SELECTORS = {
+  "dev.to": "div.crayons-article__body.text-styles.spec__body > *:not(.highlight.js-code-highlight)",
+  "doc.adminforge.de": "div.CodeMirror",
+};
+
+const generateUniqueId = name => `____USERSCRIPT____${name}__${crypto.randomUUID()}`;
+const GM_fetch = (url, options) => new Promise((resolve, reject) => new GM_xmlhttpRequest({
+  url,
+  ...options,
+  onabort: reject,
+  onerror: reject,
+  ontimeout: reject,
+  onload: resolve,
+}));
 
 GM_registerMenuCommand("Set font url", () => {
   let fontUrl;
@@ -30,17 +44,13 @@ GM_registerMenuCommand("Set font url", () => {
   alert("Set font url");
 });
 
-const SELECTORS = {
-  "dev.to": "div.crayons-article__body.text-styles.spec__body > *:not(.highlight.js-code-highlight)",
-  "doc.adminforge.de": "div.CodeMirror",
-};
-
 const fontUrl = GM_getValue("fonturl");
 if (fontUrl) {
+  const font = await GM_fetch(fontUrl, responseType: "arraybuffer" })
   const fontName = generateUniqueId("stagenterprises-Fontchanger");
-  const font = new FontFace(fontName, `url(${fontUrl})`);
-  await font.load();
-  document.fonts.add(font);
+  const fontFace = new FontFace(fontName, font.response);
+  await fontFace.load();
+  document.fonts.add(fontFace);
 
   document.querySelectorAll(SELECTORS[window.location.hostname]).forEach(el => el.style.fontFamily = fontName);
 }
